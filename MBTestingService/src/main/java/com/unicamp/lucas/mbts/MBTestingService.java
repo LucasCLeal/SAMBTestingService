@@ -5,20 +5,33 @@
  */
 package com.unicamp.lucas.mbts;
 
-import com.unicamp.lucas.common.fileHandler;
+import com.unicamp.lucas.common.FileHandler;
+import com.unicamp.lucas.mbts.TestGenerator;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 
 /**
  *
- * @author LucasCLeal
+ * @author LucasCLeal Serviço SOAP para model based testing
  */
 @WebService(serviceName = "MBTestingService")
 public class MBTestingService {
+
+    //iniciando objetos usados apra executar operações
+    static TestGenerator tstGen = new TestGenerator();
+    static FileHandler flHand = new FileHandler();
+
+    static Path rootPath = Paths.get("/Users/LucasCLeal/Documents/");
+
+    //extenção de usado nos modelos 
+    //static String ext = "graphml";
+    static String ext = "json";
 
     /**
      * Operação de Web service
@@ -28,41 +41,58 @@ public class MBTestingService {
      * @return
      * @throws java.io.IOException
      */
-    @WebMethod(operationName = "uploadFile")
-    public Boolean uploadFile(@WebParam(name = "fileName") String fileName, @WebParam(name = "fileData") byte[] fileData) throws IOException {
+    @WebMethod(operationName = "modelUpdate")
+    public String modelUpdate(@WebParam(name = "fileName") String fileName, @WebParam(name = "fileData") byte[] fileData) throws IOException {
 
-        //iniciando file handler
-        fileHandler fi = new fileHandler();
-
-        boolean result;
-
-        //locais de origem e destino que devem ser mudados de acordo com o sistema
-        Path root = Paths.get("/Users/LucasCLeal/Documents");
-        Path archive = Paths.get("/Users/LucasCLeal/Documents/workspace/models");
-        //
-
-        Path filePath = fi.generateFilePath(root, fileName);
-        System.out.println("file location: " + filePath.toString());
-
-        //caso o arquivo já exista no WS é necessário salvar ele na pasta de archive, caso não exista executar o download normalmente
-        if (fi.fileOrfolderExist(filePath)) {
-            System.out.println("File exists");
-            try {
-                fi.backupFile(filePath, archive);
-                fi.deleteFileAtPath(filePath);
-                fi.writeDataInToFilePath(filePath, fileData);
-                result = true;
-            } catch (IOException upfail) {
-                System.err.format("IOException: %s%n", upfail);
-                result = false;
-            }
-            System.out.println("old model archived and model updated at root folder");
-        } else {
-            System.out.println("File does not exist yet");
-            fi.writeDataInToFilePath(filePath, fileData);
-            result = true;
+        //acessando arquivo com modelo//
+        //File modelfile = new File("/Users/LucasCLeal/Documents/ex.gw3");
+        //File modelfile = new File("/Users/LucasCLeal/Documents/workspace/SAMBTestingService/MBTestingService/src/main/resources/TestModel.json");
+        //executando teste usando novo modelo
+        //salvando arquivo
+        try {
+            //salvando arquivo
+            Path modelPath = flHand.updateFileAndArchive(fileName, fileData);
+            //verificando se GW-rest está operacional e carregando arquivo no serviço
+            File modelfile = new File(modelPath.toString());
+            tstGen.loadModeltoGW(modelfile);
+            //executando teste
+            tstGen.exeTest(modelfile);
+            return "done!";
+        } catch (IOException e) {
+            System.out.println("IOException: " + e);
+            return "fail!";
         }
 
-        return result;
     }
+
+    @WebMethod(operationName = "executeAllTests")
+    public void executeAllTests() {
+
+        //execute testes using all models in the root folder.
+        //buscando arquivos na pasta raiz   
+        ArrayList<File> modelFiles = flHand.filesAtPathWithExtension(rootPath, ext);
+
+        //exibindo resultado da busca
+        System.out.println("models found: ");
+        for (File modelFile : modelFiles) {
+            System.out.println(modelFile.getName());
+        }
+
+        //executando testes para cada arquivo de modelo encontrado
+        if (tstGen.isGWRestServiceOnline()) {
+            for (File modelFile : modelFiles) {
+                try {
+                    if (tstGen.loadModeltoGW(modelFile)) {
+                        tstGen.exeTest(modelFile);
+                    }
+                } catch (Exception e) {
+                    System.out.println("Exception: " + e);
+                }
+            }
+
+        } else {
+            System.out.println("please, check if the communication port to Rest Server is right.");
+        }
+    }
+
 }

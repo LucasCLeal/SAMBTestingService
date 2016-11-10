@@ -1,0 +1,13 @@
+com/unicamp/lucas/common/pojo/Vertex.class
+com/unicamp/lucas/common/pojo/Properties.class
+com/unicamp/lucas/mbts/MBTestingService.class
+com/unicamp/lucas/mbts/GraphWalkerRestHandler.class
+com/unicamp/lucas/mbts/GraphWalkerRestClient.class
+com/unicamp/lucas/common/pojo/TestStatistics.class
+com/unicamp/lucas/common/pojo/Model.class
+com/unicamp/lucas/mbts/TestSetUp.class
+com/unicamp/lucas/common/FileHandler.class
+com/unicamp/lucas/mbts/TestGenerator.class
+com/unicamp/lucas/mbts/TestReport.class
+com/unicamp/lucas/common/pojo/ModelData.class
+com/unicamp/lucas/common/pojo/Edge.class
