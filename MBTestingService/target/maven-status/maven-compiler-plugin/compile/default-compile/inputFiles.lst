@@ -1,11 +1,16 @@
+/Users/LucasCLeal/Documents/workspace/SAMBTestingService/MBTestingService/src/main/java/com/unicamp/lucas/rest/RESTInterface.java
 /Users/LucasCLeal/Documents/workspace/SAMBTestingService/MBTestingService/src/main/java/com/unicamp/lucas/common/pojo/Model.java
+/Users/LucasCLeal/Documents/workspace/SAMBTestingService/MBTestingService/src/main/java/com/unicamp/lucas/rest/ExeFullTest.java
+/Users/LucasCLeal/Documents/workspace/SAMBTestingService/MBTestingService/src/main/java/com/unicamp/lucas/rest/SingleModelTestGen.java
 /Users/LucasCLeal/Documents/workspace/SAMBTestingService/MBTestingService/src/main/java/com/unicamp/lucas/mbts/GraphWalkerRestClient.java
 /Users/LucasCLeal/Documents/workspace/SAMBTestingService/MBTestingService/src/main/java/com/unicamp/lucas/mbts/TestReport.java
 /Users/LucasCLeal/Documents/workspace/SAMBTestingService/MBTestingService/src/main/java/com/unicamp/lucas/mbts/TestSetUp.java
 /Users/LucasCLeal/Documents/workspace/SAMBTestingService/MBTestingService/src/main/java/com/unicamp/lucas/common/pojo/Edge.java
+/Users/LucasCLeal/Documents/workspace/SAMBTestingService/MBTestingService/src/main/java/com/unicamp/lucas/common/pojo/ModelsInfo.java
 /Users/LucasCLeal/Documents/workspace/SAMBTestingService/MBTestingService/src/main/java/com/unicamp/lucas/common/FileHandler.java
 /Users/LucasCLeal/Documents/workspace/SAMBTestingService/MBTestingService/src/main/java/com/unicamp/lucas/common/pojo/Vertex.java
 /Users/LucasCLeal/Documents/workspace/SAMBTestingService/MBTestingService/src/main/java/com/unicamp/lucas/mbts/TestGenerator.java
+/Users/LucasCLeal/Documents/workspace/SAMBTestingService/MBTestingService/src/main/java/com/unicamp/lucas/rest/GetModelList.java
 /Users/LucasCLeal/Documents/workspace/SAMBTestingService/MBTestingService/src/main/java/com/unicamp/lucas/common/pojo/TestStatistics.java
 /Users/LucasCLeal/Documents/workspace/SAMBTestingService/MBTestingService/src/main/java/com/unicamp/lucas/mbts/MBTestingService.java
 /Users/LucasCLeal/Documents/workspace/SAMBTestingService/MBTestingService/src/main/java/com/unicamp/lucas/common/pojo/ModelData.java

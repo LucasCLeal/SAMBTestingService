@@ -27,7 +27,7 @@ public class MBTestingService {
     static TestGenerator tstGen = new TestGenerator();
     static FileHandler flHand = new FileHandler();
 
-    static Path rootPath = Paths.get("/Users/LucasCLeal/Documents/");
+    static Path rootPath = Paths.get("/Users/LucasCLeal/Documents/models");
 
     //extenção de usado nos modelos 
     //static String ext = "graphml";

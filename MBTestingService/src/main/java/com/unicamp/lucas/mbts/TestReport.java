@@ -29,8 +29,8 @@ import org.codehaus.jackson.map.ObjectMapper;
 public class TestReport {
 
     //locais de origem e destino que devem ser mudados de acordo com o sistema
-    static Path root = Paths.get("/Users/LucasCLeal/Documents");
-    static Path reportFolder = Paths.get("/Users/LucasCLeal/Documents/TestReports");
+    static Path root = Paths.get("/Users/LucasCLeal/Documents/models/");
+    static Path reportFolder = Paths.get("/Users/LucasCLeal/Documents/models/reports/");
     static String ext = ".txt";
     static String separator = System.getProperty("line.separator");
     static Charset charset = Charset.forName("US-ASCII");

@@ -35,8 +35,8 @@ public class FileHandler {
     //todas as operações usand file i/o podem gerar Exceptions, sendo assim todos os metodos devem ser construidos dentro de trys 
 
     //locais de origem e destino que devem ser mudados de acordo com o sistema
-    static Path root = Paths.get("/Users/LucasCLeal/Documents");
-    static Path archive = Paths.get("/Users/LucasCLeal/Documents/workspace/models");
+    static Path root = Paths.get("/Users/LucasCLeal/Documents/models/");
+    static Path archive = Paths.get("/Users/LucasCLeal/Documents/workspace/models/archive/");
 
     static String separator = System.getProperty("line.separator");
     //
@@ -200,15 +200,29 @@ public class FileHandler {
         //criando lista de arquivos.
         ArrayList<File> modelFiles = new ArrayList<>();
 
-        for (File lisFile : listOfFiles) {
+        for (File file : listOfFiles) {
             //caso seja um arquivo e tenha a extenção desejada é adicionado a lista
-            if (lisFile.isFile() && FilenameUtils.getExtension(lisFile.getName()).equals(filesExtention)) {
-                modelFiles.add(lisFile);
+            if (file.isFile() && FilenameUtils.getExtension(file.getName()).equals(filesExtention)) {
+                modelFiles.add(file);
             }
         }
 
         return modelFiles;
 
+    }
+
+    public Path fileAtPathWithName(Path rootPath, String fileName, String filesExtention) {
+
+        File folder = new File(rootPath.toString());
+        File[] listOfFiles = folder.listFiles();
+        Path filePath = null;
+        for (File file : listOfFiles) {
+            //caso seja um arquivo e tenha a extenção desejada é adicionado a lista
+            if (file.isFile() && FilenameUtils.getBaseName(file.getName()).equals(fileName) && FilenameUtils.getExtension(file.getName()).equals(filesExtention)) {
+                filePath = Paths.get(file.getPath());
+            }
+        }
+        return filePath;
     }
 
     public Path updateFileAndArchive(String fileName, byte[] fileData) throws IOException {

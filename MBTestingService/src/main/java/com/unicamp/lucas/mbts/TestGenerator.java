@@ -86,18 +86,44 @@ public class TestGenerator {
             //filtrar entre vertices e arestas talvez seja necessário
             String currentElement = gwRestHandler.getNextStep();
             //chamada para teste para TESTING SERVICE
-            
+
             //adicionando linha no relatório com 
             repBody = tstRep.fillReportBody(repBody, currentElement, "success");
         }
-        
-        
-        System.out.println(repHead+repBody);
+
+        System.out.println(repHead + repBody);
         //relatorio
-        tstRep.updateTestReportFile(modelfile.getName(), repHead+repBody);
-        
+        tstRep.updateTestReportFile(modelfile.getName(), repHead + repBody);
+
         gwRestHandler.stopService();
         System.out.println("Test finished!");
+
+    }
+
+    public String exeTestReturnResult(File modelFile) {
+
+        //metodo responsável por fazer o link entre o TS e o graphWalker RestClient
+        //testes e resultados são salvos num arquivo de texto.
+        System.out.println("Starting test generation...");
+        //gwRestHandler.resetService();
+        String repHead = tstRep.generateReportHeader(modelFile);
+        String repBody = "";
+        while (gwRestHandler.hasNextStep()) {
+            //filtrar entre vertices e arestas talvez seja necessário
+            String currentElement = gwRestHandler.getNextStep();
+            //chamada para teste para TESTING SERVICE
+
+            //adicionando linha no relatório com 
+            repBody = tstRep.fillReportBody(repBody, currentElement, "success");
+        }
+
+        System.out.println(repHead + repBody);
+        //relatorio
+        tstRep.updateTestReportFile(modelFile.getName(), repHead + repBody);
+
+        gwRestHandler.stopService();
+        System.out.println("Test finished!");
+        return repHead + repBody;
 
     }
 
